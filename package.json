@@ -1,0 +1,21 @@
+{
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "express-session": "^1.15.6",
+    "mysql": "^2.16.0",
+    "req-flash": "0.0.3"
+  }
+}
