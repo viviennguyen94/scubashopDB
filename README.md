@@ -13,6 +13,7 @@ This is a Scuba Diving Equipment store website for Database Design Course
 
 3) Go to http://localhost:3000
 
+4) In order to access admin (employee) pages, go to http://localhost:3000/admin
 
 ## ------Other Options-------
 * to access phpMyAdmin, go to http://localhost/
