@@ -4,18 +4,22 @@
     <!-- similar to div -->
     <div class="row text-center" style="display: flex; flex-wrap: wrap;">
         <% if (products.length > 0) {%>
-            <div class="row text-center" style="display: flex; flex-wrap: wrap;">
-                <% products.forEach(function(product) { %>
-                    <!-- col-md-3 is 3/12 or 1/4 and col-sm-6 is 1/2 and implied is col-xs-12 -->
-                    <div class="col-md-3 col-sm-6">
-                        <div class="thumbnail">
-                            <img src="<%= product.image %>">
-                            <h4><%= product.name %></h4>
-                            <h4><%= product.price %></h4>
-                        </div>
+            <% products.forEach(function(product) { %>
+                <!-- col-md-3 is 3/12 or 1/4 and col-sm-6 is 1/2 and implied is col-xs-12 -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <img class="productImage" src="/assets/img/<%= product.image %>" alt="">
+                        <h4 class="text-info"><%= product.product_name %></h4>
+                        <h4>$ <%= product.price %></h4>
+                        <!-- button values to enter into cart -->
+                        <input type="text" name="quantity" class="form-control" value="1" />
+                        <input type="hidden" name="product_name" value="<%= product.product_name %>" /> 
+                        <input type="hidden" name="price" value="<%= product.price %>" /> 
+                        <!-- button submit -->
+                        <input type="submit" name="add_to_cart" class="btn btn-info" value="Add to Cart" />
                     </div>
-                <% }) %>
-            </div>
+                </div>
+            <% }) %>
         <% } else { %>
             <p class="text-center">No products found.</p>
         <% } %>

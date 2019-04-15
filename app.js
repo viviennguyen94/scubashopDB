@@ -13,6 +13,10 @@ const db = mysql.createConnection({
 
 const app = express();
 
+// to allow local images to be located in express/node server
+var serveStatic = require('serve-static');
+app.use(serveStatic('public'));
+
 // 
 const {getHomePage, getProductPage} = require('./routes/public');
 const {getAdminPage, addProductPage, addProduct, deleteProduct, editProduct, editProductPage} = require('./routes/admin');

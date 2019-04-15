@@ -1,0 +1,14 @@
+.thumbnail img { /* make images the same height with containers */
+    height: 240px;
+    margin: 5px auto;
+}
+.thumbnail .btn { /* give space around add to cart buttons */
+    margin: 10px;
+}
+.thumbnail .form-control { /* make form control smaller */
+    width: 100%;
+}
+.product-img { /* make product images from add/edit pages smaller */
+    width: 40px;
+    height: 40px;
+}
