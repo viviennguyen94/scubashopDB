@@ -2,6 +2,7 @@ const express = require('express'),
     path = require('path')
 const mysql = require('mysql'),
     bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload');
 
 // Create connection
 const db = mysql.createConnection({
@@ -13,9 +14,9 @@ const db = mysql.createConnection({
 
 const app = express();
 
-// to allow local images to be located in express/node server
-var serveStatic = require('serve-static');
-app.use(serveStatic('public'));
+// // to allow local images to be located in express/node server
+// var serveStatic = require('serve-static');
+// app.use(serveStatic('public'));
 
 // 
 const {getHomePage, getProductPage} = require('./routes/public');
@@ -31,6 +32,16 @@ db.connect((err) => {
 
 global.db = db;
 
+let port = 3000;
+// configure middleware
+app.set('port', process.env.port || port); // set express to use this port
+app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
+app.set('view engine', 'ejs'); // configure template engine
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // parse form data client
+app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
+app.use(fileUpload()); // configure fileupload
+
 // home page (or index)
 app.get('/', getHomePage);
 // product page
@@ -42,17 +53,6 @@ app.get('/edit/:id', editProductPage);
 app.get('/delete/:id', deleteProduct);
 app.post('/add', addProduct);
 app.post('/edit/:id', editProduct);
-
-
-// configure middleware
-app.set('port', process.env.port || 3000); // set express to use this port
-app.set('views', __dirname + '/views'); // set express to look in this folder to render our view
-app.set('view engine', 'ejs'); // configure template engine
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // parse form data client
-app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
-
-let port = 3000;
 
 app.listen(port, () => {
     console.log(`Server started on port: ${port}`);

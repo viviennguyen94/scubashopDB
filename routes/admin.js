@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 module.exports = {
     getAdminPage: (req, res) => {
         let query = "SELECT * FROM products ORDER BY id ASC"; // query database to get all the products
@@ -28,25 +26,24 @@ module.exports = {
             return res.status(400).send("No files were uploaded.");
         }
 
+
         let message = '';
-        let first_name = req.body.first_name;
-        let last_name = req.body.last_name;
-        let position = req.body.position;
-        let number = req.body.number;
-        let username = req.body.username;
+        let product_ID = req.body.product_ID;
+        let product_name = req.body.product_name;
+        let price = req.body.price;
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
-        let fileExtension = uploadedFile.mimetype.split('/')[1];
-        image_name = username + '.' + fileExtension;
+        // let fileExtension = uploadedFile.mimetype.split('/')[1];
+        // image_name = image_name + '.' + fileExtension;
 
-        let usernameQuery = "SELECT * FROM `products` WHERE user_name = '" + username + "'";
+        let pID_Query = "SELECT * FROM `products` WHERE id = '" + product_ID + "'";
 
-        db.query(usernameQuery, (err, result) => {
+        db.query(pID_Query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
             if (result.length > 0) {
-                message = 'Username already exists';
+                message = 'Product ID already exists';
                 res.render('productAdd.ejs', {
                     message,
                     title: 'Welcome to Socka | Add a new product'
@@ -60,8 +57,8 @@ module.exports = {
                             return res.status(500).send(err);
                         }
                         // send the product's details to the database
-                        let query = "INSERT INTO `products` (first_name, last_name, position, number, image, user_name) VALUES ('" +
-                            first_name + "', '" + last_name + "', '" + position + "', '" + number + "', '" + image_name + "', '" + username + "')";
+                        let query = "INSERT INTO `products` (id, product_name, image, price) VALUES ('" +
+                            product_ID + "', '" + product_name + "', '" + image_name + "', '" + price + "')";
                         db.query(query, (err, result) => {
                             if (err) {
                                 return res.status(500).send(err);
@@ -95,12 +92,11 @@ module.exports = {
     },
     editProduct: (req, res) => {
         let productId = req.params.id;
-        let first_name = req.body.first_name;
-        let last_name = req.body.last_name;
-        let position = req.body.position;
-        let number = req.body.number;
+        // let product_ID = req.body.first_name;
+        let product_name = req.body.product_name;
+        let price = req.body.price;
 
-        let query = "UPDATE `products` SET `first_name` = '" + first_name + "', `last_name` = '" + last_name + "', `position` = '" + position + "', `number` = '" + number + "' WHERE `products`.`id` = '" + productId + "'";
+        let query = "UPDATE `products` SET `product_name` = '" + product_name + "', `price` = '" + price + "' WHERE `products`.`id` = '" + productId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -110,27 +106,14 @@ module.exports = {
     },
     deleteProduct: (req, res) => {
         let productId = req.params.id;
-        let getImageQuery = 'SELECT image from `products` WHERE id = "' + productId + '"';
+        // let getImageQuery = 'SELECT image from `products` WHERE id = "' + productId + '"';
         let deleteUserQuery = 'DELETE FROM products WHERE id = "' + productId + '"';
 
-        db.query(getImageQuery, (err, result) => {
+        db.query(deleteUserQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-
-            let image = result[0].image;
-
-            fs.unlink(`public/assets/img/${image}`, (err) => {
-                if (err) {
-                    return res.status(500).send(err);
-                }
-                db.query(deleteUserQuery, (err, result) => {
-                    if (err) {
-                        return res.status(500).send(err);
-                    }
-                    res.redirect('/');
-                });
-            });
+            res.redirect('/');
         });
     }
 };
