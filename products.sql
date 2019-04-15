@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2019 at 10:09 PM
+-- Generation Time: Apr 16, 2019 at 12:16 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -40,13 +40,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_name`, `image`, `price`) VALUES
-(1, 'Fancy Goggles', 'goggles.jpg', 6.99),
+(1, 'Fancy Goggles', 'goggles.jpg', 7.99),
 (2, 'Fancy Snorkels', 'snorkels.jpg', 6.99),
 (3, 'Mens Diving Swimsuit', 'mensuit.jpg', 40.75),
 (4, 'Womens Diving Swimsuit', 'womensuit.jpg', 35.75),
 (5, 'Mask (Men)', 'menmask.jpg', 10.99),
 (6, 'Mask (Women)', 'womenmask.jpg', 9.99),
-(7, 'Mask and Snorkel Set', 'masksnorkelset.jpg', 15.99);
+(7, 'Mask and Snorkel Set', 'masksnorkelset.jpg', 15.99),
+(8, 'Fins (Women)', 'womenfins.jpg', 24.99);
 
 --
 -- Indexes for dumped tables
