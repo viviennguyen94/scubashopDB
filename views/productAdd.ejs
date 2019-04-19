@@ -1,17 +1,17 @@
 <% include partials/header %>
-<h1>Add Page!</h1>
 
-<p>To edit or delete a product, click <a href="/admin">here</a></p>
 
 <div class="container">
+    <h1>Add Page!</h1>
+
+    <p>To edit or delete a product, click <a href="/admin">here</a></p>
+    <p>To view order details, click <a href="/orderDetails">here</a></p>
+    <p>To view order shipping details, click <a href="/orderShippingStatus">here</a></p>
     <% if (message != '') { %>
         <p class="text-center text-danger"><%= message %></p>
     <% } %>
     <form class="add-product-form" action="" method="post" enctype="multipart/form-data">
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <input type="number" class="form-control" name="product_ID" id="product-ID" placeholder="Product ID" required>
-            </div>
             <div class="form-group col-md-6">
                 <input type="text" class="form-control" name="product_name" id="product-name" placeholder="Product Name" required>
             </div>
@@ -20,21 +20,18 @@
             <div class="form-group col-md-6">
                 <input type="number" step="0.01" class="form-control" name="price" id="price" placeholder="Price" required>
             </div>
-            <!-- <div class="form-group col-md-6">
-                <select id="position" name="position" class="form-control" required>
-                    <option selected disabled>Choose position</option>
-                    <option>Goalkeeper</option>
-                    <option>Defender</option>
-                    <option>Midfielder</option>
-                    <option>Forward</option>
-                </select>
-            </div> -->
+            <div class="form-group col-md-6">
+                <input type="number" class="form-control" name="qty_in_stock" id="qty-in-stock" placeholder="Quantity on Hand" required>
+            </div>
             <div class="col-md-12">
                 <label for="product-img"><b>Product Image</b></label><br>
                 <input type="file" name="image" id="product-img" class="" required>
             </div>
+            <div class="col-md-12">
+                <button style="margin: 20px 0px" type="submit" class="btn btn-primary float-right">Add Product</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary float-right">Add Product</button>
+        
     </form>
 </div>
 <% include partials/footer %>

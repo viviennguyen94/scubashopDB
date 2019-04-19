@@ -28,7 +28,6 @@ module.exports = {
 
 
         let message = '';
-        let product_ID = req.body.product_ID;
         let product_name = req.body.product_name;
         let price = req.body.price;
         let uploadedFile = req.files.image;
@@ -36,14 +35,14 @@ module.exports = {
         // let fileExtension = uploadedFile.mimetype.split('/')[1];
         // image_name = image_name + '.' + fileExtension;
 
-        let pID_Query = "SELECT * FROM `products` WHERE id = '" + product_ID + "'";
+        let pName_Query = "SELECT * FROM `products` WHERE product_name = '" + product_name + "'";
 
-        db.query(pID_Query, (err, result) => {
+        db.query(pName_Query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
             if (result.length > 0) {
-                message = 'Product ID already exists';
+                message = 'Product already exists';
                 res.render('productAdd.ejs', {
                     message,
                     title: 'Welcome to Socka | Add a new product'
@@ -57,8 +56,7 @@ module.exports = {
                             return res.status(500).send(err);
                         }
                         // send the product's details to the database
-                        let query = "INSERT INTO `products` (id, product_name, image, price) VALUES ('" +
-                            product_ID + "', '" + product_name + "', '" + image_name + "', '" + price + "')";
+                        let query = "INSERT INTO `products` (product_name, image, price) VALUES ('" +  product_name + "', '" + image_name + "', '" + price + "')";
                         db.query(query, (err, result) => {
                             if (err) {
                                 return res.status(500).send(err);
@@ -92,16 +90,16 @@ module.exports = {
     },
     editProduct: (req, res) => {
         let productId = req.params.id;
-        // let product_ID = req.body.first_name;
         let product_name = req.body.product_name;
         let price = req.body.price;
+        let qty_in_stock = req.body.qty_in_stock;
 
-        let query = "UPDATE `products` SET `product_name` = '" + product_name + "', `price` = '" + price + "' WHERE `products`.`id` = '" + productId + "'";
+        let query = "UPDATE `products` SET `product_name` = '" + product_name + "', `qty_in_stock` = '" + qty_in_stock + "', `price` = '" + price + "' WHERE `products`.`id` = '" + productId + "'";
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            res.redirect('/admin');
         });
     },
     deleteProduct: (req, res) => {
@@ -113,7 +111,40 @@ module.exports = {
             if (err) {
                 return res.status(500).send(err);
             }
-            res.redirect('/');
+            res.redirect('/admin');
+        });
+    },
+    orderDetails: (req, res) => {
+
+        let query = "SELECT * FROM orders ORDER BY orderID DESC"; // query database to get all the order details
+
+        // execute query
+        db.query(query, (err, result) => {
+            if (err) {
+                // res.redirect('/');
+                console.log(err)
+                return;
+            }
+            res.render('orderDetails.ejs', {
+                title: 'Order Details',
+                orders : result
+            });
+        });
+    },
+    orderShippingStatus: (req, res) => {
+
+        let query = "SELECT * FROM order_items ORDER BY orderID DESC"; // query database to get all the order shipping details 
+        // execute query
+        db.query(query, (err, result) => {
+            if (err) {
+                // res.redirect('/');
+                console.log(err)
+                return;
+            }
+            res.render('orderShippingStatus.ejs', {
+                title: 'Order Shipping status',
+                orders : result
+            });
         });
     }
 };

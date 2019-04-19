@@ -1,38 +1,44 @@
 <% include partials/header %>
-<h1>Admin Page!</h1>
+<div class="container">
+    <h1>Admin Page!</h1>
 
-<p>To add product to the database, click <a href="/add">here</a></p>
+    <p>To add product to the database, click <a href="/add">here</a></p>
+    <p>To view order details, click <a href="/orderDetails">here</a></p>
+    <p>To view order shipping details, click <a href="/orderShippingStatus">here</a></p>
 
-<div class="table-wrapper">
-    <% if (products.length > 0) {%>
-        <table class="table table-hovered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% products.forEach((product, index) => { %>
+    <div class="table-wrapper">
+        <% if (products.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="row"><%= product.id %></th>
-                        <td><img src="/assets/img/<%= product.image %>" class="rounded-circle product-img" alt=""></td>
-                        <td><%= product.product_name %></td>
-                        <td><%= product.price %></td>
-                        <td>
-                            <a href="/edit/<%= product.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                            <a href="/delete/<%= product.id %>" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity on Hand</th>
+                        <th scope="col">Action</th>
                     </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <p class="text-center">No products found. Go <a href="/add" >here</a> to add products.</p>
-    <% } %>
+                </thead>
+                <tbody>
+                    <% products.forEach((product, index) => { %>
+                        <tr>
+                            <th scope="row"><%= product.id %></th>
+                            <td><img src="/assets/img/<%= product.image %>" class="rounded-circle product-img" alt=""></td>
+                            <td><%= product.product_name %></td>
+                            <td><%= product.price %></td>
+                            <td><%= product.qty_in_stock %></td>
+                            <td>
+                                <a href="/edit/<%= product.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/delete/<%= product.id %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No products found. Go <a href="/add" >here</a> to add products.</p>
+        <% } %>
+    </div>
 </div>
 
 <!-- <a href="/campgrounds">View All Campgrounds</a> -->

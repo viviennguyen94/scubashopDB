@@ -1,0 +1,93 @@
+<% include partials/header %>
+
+<div class="row billing">
+  <div class="col-75">
+    <div class="container">
+      <h1><%= session.user.full_cname %> - Confirm Shipping Info</h1>
+
+      <p>To edit or delete a product, click <a href="/viewcart">here</a></p>
+      <form action="" method="post" enctype="multipart/form-data">
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <p id="fname" name="firstname"><%= session.user.full_cname %></p>
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <p id="email" name="email"><%= session.user.email %></p>
+            <label for="address"><i class="fa fa-address-card-o"></i> Address</label>
+            <p id="adr" name="address"><%= session.user.address %></p>
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <p id="city" name="city"><%= session.user.city %></p>
+
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <p id="state" name="state"><%= session.user.state %></p>
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <p id="zip" name="zip"><%= session.user.zipcode %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number *</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" required>
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2018">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+        <input type="submit" value="Continue to checkout" class="btn">
+      </form>
+    </div>
+  </div>
+  <div class="col-25">
+    <div class="container">
+            <% if (products !== null) {%>
+                <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><%- JSON.stringify(session.cart.totalQty) %></b></span></h4>
+                <% products.forEach((product, index) => { %>
+                    <% if (product.qty == 1) { %>
+                        <p><a href="#"><%= product.item[0].product_name %></a> <span class="price"><%= product.price %></span></p>
+                        <hr>
+                    <% } else { %>
+                        <p><a href="#"><%= product.item[0].product_name %></a> x <%= product.qty %> <span class="price"><%= product.price %></span></p>
+                        <hr>
+                    <% } %>
+                <% }) %>
+                <p>Total <span class="price" style="color:black"><b><%= totalPrice %></b></span></p>
+            <% } else { %>
+                <tr>
+                    <p class="text-center">You shouldn't even be here...lol</p>
+                </tr>      
+            <% } %>
+    </div>
+  </div>
+</div>
+
+<% include partials/footer %>

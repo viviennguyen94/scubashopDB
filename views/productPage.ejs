@@ -1,23 +1,33 @@
 <% include partials/header %>
 
 <div class="container">
+    <!-- pop up view cart -->
+    <div id="popViewCart">
+        <h4><span id="itemName"> </span> has been added to your cart</h4>
+        <button class="viewCartBtn"><a href="/viewCart" target="_blank" rel="noopener" value="View Cart">View Cart</a></button>
+    </div>
     <!-- similar to div -->
     <div class="row text-center" style="display: flex; flex-wrap: wrap;">
         <% if (products.length > 0) {%>
             <% products.forEach(function(product) { %>
                 <!-- col-md-3 is 3/12 or 1/4 and col-sm-6 is 1/2 and implied is col-xs-12 -->
                 <div class="col-md-3 col-sm-6">
-                    <div class="thumbnail">
-                        <img class="productImage" src="/assets/img/<%= product.image %>" alt="">
-                        <h4 class="text-info"><%= product.product_name %></h4>
-                        <h4>$ <%= product.price %></h4>
-                        <!-- button values to enter into cart -->
-                        <input type="text" name="quantity" class="form-control" value="1" />
-                        <input type="hidden" name="product_name" value="<%= product.product_name %>" /> 
-                        <input type="hidden" name="price" value="<%= product.price %>" /> 
-                        <!-- button submit -->
-                        <input type="submit" name="add_to_cart" class="btn btn-info" value="Add to Cart" />
-                    </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="thumbnail">
+                                <img class="productImage" src="/assets/img/<%= product.image %>" alt="">
+                                <h4 class="text-info"><%= product.product_name %></h4>
+
+                                <hr>
+                                <h4>$ <%= product.price %></h4>
+                                <!-- button values to enter into cart -->
+                                <!-- FORM CONTROL FOR QUANTITY??????????????????? -->
+                                <input type="hidden" name="product_ID" value="<%= product.id %>" />
+                                <input type="hidden" name="product_name" value="<%= product.product_name %>" /> 
+                                <input type="hidden" name="price" value="<%= product.price %>" /> 
+                                <!-- button submit -->
+                                <input onclick="addCart()" type="submit" name="add_to_cart" class="btn btn-info" id="<%= product.product_name %>" value="Add to Cart" />
+                        </div>
+                    </form>
                 </div>
             <% }) %>
         <% } else { %>
@@ -25,7 +35,11 @@
         <% } %>
     </div>
 </div>
-
+<script>
+function addCart() {
+    
+}
+</script>
 
 <!-- <a href="/campgrounds">View All Campgrounds</a> -->
 <% include partials/footer %>

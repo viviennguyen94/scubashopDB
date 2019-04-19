@@ -1,9 +1,8 @@
 <% include partials/header %>
-<h1>Edit Page!</h1>
 
-<p>Welcome to Sunshine Scuba Shop</p>
 
 <div class="container">
+    <h1>Edit Page!</h1>
     <% if (message) { %>
         <p class="text-center text-danger"><%= message %></p>
     <% } %>
@@ -12,35 +11,20 @@
         <form class="add-product-form" action="" method="post" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="product-id">Product ID</label>
-                    <input type="number" class="form-control" name="product_ID" id="product-id" value="<%= product.id %>">
-                </div>
-                <div class="form-group col-md-6">
                     <label for="product-name">Product Name</label>
                     <input type="text" class="form-control" name="product_name" id="product-name" value="<%= product.product_name %>" required>
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="qty-in-stock">Quantity on Hand</label>
+                    <input type="number" class="form-control" name="qty_in_stock" id="qty-in-stock" placeholder="Quantity" value="<%= product.qty_in_stock %>" required>
+                </div>
+                
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="price">Price</label>
                     <input type="number" class="form-control" name="price" id="price" placeholder="Price" value="<%= product.price %>" required>
                 </div>
-                <!-- <div class="form-group col-md-6">
-                    <label for="position">Position</label>
-                    <select id="position" name="position" class="form-control" required>
-                        <option selected><%= product.position %></option>
-                        <option>Goalkeeper</option>
-                        <option>Centre Back</option>
-                        <option>Right Back</option>
-                        <option>Left Back</option>
-                        <option>Defensive Midfielder</option>
-                        <option>Central Midfielder</option>
-                        <option>Attacking Midfielder</option>
-                        <option>Right Wing Forward</option>
-                        <option>Left Wing Forward</option>
-                        <option>Striker</option>
-                    </select>
-                </div> -->
             </div>
             <button type="submit" class="btn btn-success float-right">Update Product</button>
         </form>

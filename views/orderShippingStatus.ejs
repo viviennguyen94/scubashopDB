@@ -1,0 +1,38 @@
+<% include partials/header %>
+
+<div class="container">
+    <h1>Admin Page!</h1>
+
+    <p>To add product to the database, click <a href="/add">here</a></p>
+    <p>To view order details, click <a href="/orderDetails">here</a></p>
+    <p>To edit or delete a product, click <a href="/admin">here</a></p>
+    <div class="table-wrapper">
+        <% if (orders.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Shipping Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach((order, index) => { %>
+                        <tr>
+                            <th scope="row"><%= order.orderID %></th>
+                            <td><%= order.pid %></td>
+                            <td><%= order.qty %></td>
+                            <td><%= order.ship_status %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No orders found.</p>
+        <% } %>
+    </div>
+</div>
+
+<!-- <a href="/campgrounds">View All Campgrounds</a> -->
+<% include partials/footer %>
