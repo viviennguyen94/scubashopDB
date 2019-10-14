@@ -6,12 +6,20 @@ const express = require('express'),
     session = require('express-session');
 // const router = express.Router();
 
+// // Create connection
+// const db = mysql.createConnection({
+//     host    : 'localhost',
+//     user    : 'root',
+//     password: '',
+//     database: 'scubashop'
+// })
+
 // Create connection
 const db = mysql.createConnection({
-    host    : 'localhost',
-    user    : 'root',
-    password: '',
-    database: 'scubashop'
+    host    : 'us-cdbr-iron-east-05.cleardb.net',
+    user    : 'b1bbf2cf6853ab',
+    password: '45d590e2',
+    database: 'heroku_adf8370d8de893a'
 })
 
 const app = express();
