@@ -1,7 +1,7 @@
 ## Introduction
 This is a Scuba Diving Equipment store website for Database Design Course
 
-[![website image](homePagePreview.png)](scubashop.herokuapp.com)
+[![website image](homePagePreview.png)](https://scubashop.herokuapp.com/)
 
 ## Installation
 
