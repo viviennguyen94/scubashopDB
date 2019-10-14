@@ -1,5 +1,6 @@
 ## Introduction
 This is a Scuba Diving Equipment store website for Database Design Course
+![website image](homePagePreview.png)(scubashop.herokuapp.com)
 
 ## Installation
 
@@ -12,8 +13,6 @@ This is a Scuba Diving Equipment store website for Database Design Course
 2) `nodemon app.js`
 
 3) Go to http://localhost:3000
-
-![alt text](homePagePreview.png)
 
 4) In order to access admin (employee) pages, go to http://localhost:3000/admin
 
