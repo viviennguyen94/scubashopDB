@@ -1,7 +1,14 @@
 ## Introduction
 This is a Scuba Diving Equipment store website for Database Design Course
 
-- Includes shopping cart functionality
+Functionalities included:
+- Shop for products as a guest or user
+- Add, delete, and update product and product quantity in shopping cart
+- Login (save your shopping order)
+- View order total and checkout
+
+Admin privileges:
+- Add, delete, update products and product quantity in inventory
 
 [![website image](homePagePreview.png)](https://scubashop.herokuapp.com/)
 
