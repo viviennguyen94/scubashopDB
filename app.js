@@ -161,7 +161,7 @@ app.post('/signup', function(req, res) {
     
         db.query(sql, function(err, result) {
     
-            message = "Succesfully! Your account has been created.";
+            message = "Successfully! Your account has been created.";
             res.render('signUp',{message: message});
         });
     
