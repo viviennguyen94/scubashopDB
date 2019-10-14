@@ -3,7 +3,7 @@ const express = require('express'),
     mysql = require('mysql'),
     bodyParser = require('body-parser'),
     fileUpload = require('express-fileupload'),
-    session = require('express-session');
+    session = require('cookie-session');
 // const router = express.Router();
 
 // // Create connection
@@ -54,7 +54,6 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     // cookie: { maxAge: 1000000 }
-    store: new RedisStore()
 }));
 // middleware to make 'user' available to all templates
 app.use(function(req, res, next) {
