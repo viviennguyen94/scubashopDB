@@ -54,6 +54,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     // cookie: { maxAge: 1000000 }
+    store: new RedisStore()
 }));
 // middleware to make 'user' available to all templates
 app.use(function(req, res, next) {
