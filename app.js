@@ -178,8 +178,8 @@ app.post('/signup', function(req, res) {
     }
 })
 // connect to port
-app.listen(port, () => {
-    console.log(`Server started on port: ${port}`);
+app.listen(process.env.PORT || port, () => {
+    // console.log(`Server started on port: ${port}`);
 })
 
 // Entered onto phpmyadmin
