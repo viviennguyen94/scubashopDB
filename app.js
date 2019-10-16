@@ -15,7 +15,7 @@ const express = require('express'),
 // })
 
 // Create connection
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host    : 'us-cdbr-iron-east-05.cleardb.net',
     user    : 'b1bbf2cf6853ab',
     password: '45d590e2',
@@ -27,13 +27,13 @@ const app = express();
 const {getHomePage, getProductPage, addToCart, getCartPage, addBy1, reduceBy1, removeItem, fillBillingInfo, checkOut} = require('./routes/public');
 const {getAdminPage, addProductPage, addProduct, deleteProduct, editProduct, editProductPage, orderDetails, orderShippingStatus} = require('./routes/admin');
 
-// Connect
-db.connect((err) => {
-    if(err) {
-        throw err;
-    }
-    console.log('MySql Connected ... ');
-})
+// // Connect
+// db.connect((err) => {
+//     if(err) {
+//         throw err;
+//     }
+//     console.log('MySql Connected ... ');
+// })
 
 global.db = db;
 
